@@ -2,25 +2,30 @@ package tela;
 
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.theme.DarkStar;
-import com.jgoodies.looks.plastic.theme.DesertBlue;
-import com.jgoodies.looks.plastic.theme.ExperienceBlue;
-import com.jgoodies.looks.plastic.theme.SkyBlue;
 import static com.sun.awt.AWTUtilities.setWindowOpacity;
 import java.awt.AWTException;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Robot;
 import java.awt.SystemTray;
 import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -38,10 +43,12 @@ public class NewJFrame extends javax.swing.JFrame {
     public NewJFrame() {
         initComponents();
         setIcon();
+        jButton8.setText("<html><center>CONFIGURAR <br>GOOGLE EARTH</center></html>");
+
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension d = tk.getScreenSize();
-        System.out.println("Screen width = " + d.width);
-        System.out.println("Screen height = " + d.height);
+        //System.out.println("Screen width = " + d.width);
+        //System.out.println("Screen height = " + d.height);
 
         //200 - 115
         this.setLocation(d.width - 410, d.height - 175);
@@ -127,6 +134,9 @@ public class NewJFrame extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jButton6 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
+        jButton7 = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        jButton8 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("INFO MACHINE");
@@ -155,7 +165,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel2.setText("IP DA ESTAÇÃO:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(102, 204, 255));
+        jButton1.setBackground(new java.awt.Color(0, 255, 0));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 51, 51));
         jButton1.setText("COPIAR NOME");
@@ -174,7 +184,7 @@ public class NewJFrame extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 110, -1));
 
-        jButton2.setBackground(new java.awt.Color(102, 204, 255));
+        jButton2.setBackground(new java.awt.Color(0, 255, 0));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 51, 51));
         jButton2.setText("COPIAR IP");
@@ -232,11 +242,11 @@ public class NewJFrame extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 120, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 120, -1));
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 51));
+        jButton4.setBackground(new java.awt.Color(204, 204, 255));
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 51, 51));
+        jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("HECTHOR");
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -251,7 +261,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 100, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 100, -1));
 
         jButton5.setBackground(new java.awt.Color(255, 255, 51));
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -270,13 +280,13 @@ public class NewJFrame extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 120, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 120, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 410, 10));
 
-        jButton6.setBackground(new java.awt.Color(255, 255, 51));
+        jButton6.setBackground(new java.awt.Color(51, 51, 255));
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 51, 51));
-        jButton6.setText("PONTO");
+        jButton6.setForeground(new java.awt.Color(0, 0, 0));
+        jButton6.setText("TEAMVIEWER");
         jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton6MouseEntered(evt);
@@ -290,11 +300,54 @@ public class NewJFrame extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 100, -1));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 110, -1));
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator2.setPreferredSize(new java.awt.Dimension(30, 12));
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 10, 50));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 10, 70));
+
+        jButton7.setBackground(new java.awt.Color(255, 153, 0));
+        jButton7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(0, 0, 0));
+        jButton7.setText("PONTO");
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton7MouseExited(evt);
+            }
+        });
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 100, -1));
+
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jSeparator3.setPreferredSize(new java.awt.Dimension(30, 12));
+        getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 10, 50));
+
+        jButton8.setBackground(new java.awt.Color(51, 51, 255));
+        jButton8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(0, 0, 0));
+        jButton8.setText("EA");
+        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton8MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jButton8MouseExited(evt);
+            }
+        });
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 110, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -307,7 +360,7 @@ public class NewJFrame extends javax.swing.JFrame {
         } catch (UnknownHostException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
 //        System.out.println();
 //        try {
 //            // Deve imprimir todos os endereços do host local.
@@ -317,7 +370,6 @@ public class NewJFrame extends javax.swing.JFrame {
 //        } catch (UnknownHostException ex) {
 //            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-
 //        jTextField1.setText("Nome do PC: " + addr.getHostName());
 //        jTextField2.setText("IP: " + addr.getHostAddress());
         // jPanel1.setEnabled(false);   
@@ -453,7 +505,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseEntered
         setWindowOpacity(this, 1.0F);
-        jButton6.setToolTipText("-PONTO-");
+        jButton6.setToolTipText("-TEAMVIEWER-");
     }//GEN-LAST:event_jButton6MouseEntered
 
     private void jButton6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseExited
@@ -462,11 +514,96 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         try {
-            Runtime.getRuntime().exec("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe https://app.tangerino.com.br/Tangerino/pages/baterPonto/");
+            Runtime.getRuntime().exec("C:/Program Files (x86)/TeamViewer/teamviewer.exe");
         } catch (IOException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseEntered
+        setWindowOpacity(this, 1.0F);
+        jButton6.setToolTipText("-PONTO-");
+    }//GEN-LAST:event_jButton7MouseEntered
+
+    private void jButton7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseExited
+        setWindowOpacity(this, 0.5F);
+    }//GEN-LAST:event_jButton7MouseExited
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        try {
+            Runtime.getRuntime().exec("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe https://app.tangerino.com.br/Tangerino/?wicket:interface=wicket-0:2:loginForm:baterPonto::ILinkListener::");
+        } catch (IOException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseEntered
+        setWindowOpacity(this, 1.0F);
+        jButton6.setToolTipText("-GOOGLE EARTH-");
+    }//GEN-LAST:event_jButton8MouseEntered
+
+    private void jButton8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseExited
+        setWindowOpacity(this, 0.5F);
+    }//GEN-LAST:event_jButton8MouseExited
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        UIManager.put("OptionPane.cancelButtonText", "Cancelar");
+        UIManager.put("OptionPane.noButtonText", "FORTALEZA");
+        UIManager.put("OptionPane.yesButtonText", "SR. ELITON");
+        int a = JOptionPane.showConfirmDialog(null, "QUAL MAPEAMENTO VOCÊ QUER USAR NO GOOGLE EARTH?");
+
+        if (a == JOptionPane.YES_OPTION) {
+            FileInputStream fileInputStream = null;
+            try {
+                File sourceFile = new File("C:/Arquivos/ZONEAMENTO - ELITON.kml");
+                File destinationFile = new File("C:/Users/alexnantua/AppData/LocalLow/Google/GoogleEarth/myplaces.kml");
+                //system.name
+                fileInputStream = new FileInputStream(sourceFile);
+                FileOutputStream fileOutputStream = new FileOutputStream(destinationFile);
+                int bufferSize;
+                byte[] bufffer = new byte[512];
+                while ((bufferSize = fileInputStream.read(bufffer)) > 0) {
+                    fileOutputStream.write(bufffer, 0, bufferSize);
+                }
+                fileInputStream.close();
+                fileOutputStream.close();
+
+                JOptionPane.showMessageDialog(null, "Configuração realizada, clique em OK e o Google Earth será aberto.");
+                Runtime.getRuntime().exec("C:/Program Files/Google/Google Earth Pro/client/googleearth.exe");
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else if (a == JOptionPane.NO_OPTION) {
+            FileInputStream fileInputStream = null;
+            try {
+                File sourceFile = new File("C:/Arquivos/ZONEAMENTO DE FORTALEZA 2019.kmz");
+                File destinationFile = new File("C:/Users/" + System.getProperty("user.name") + "/AppData/LocalLow/Google/GoogleEarth/myplaces.kml");
+                //system.name
+                fileInputStream = new FileInputStream(sourceFile);
+                FileOutputStream fileOutputStream = new FileOutputStream(destinationFile);
+                int bufferSize;
+                byte[] bufffer = new byte[512];
+                while ((bufferSize = fileInputStream.read(bufffer)) > 0) {
+                    fileOutputStream.write(bufffer, 0, bufferSize);
+                }
+                fileInputStream.close();
+                fileOutputStream.close();
+
+                JOptionPane.showMessageDialog(null, "Configuração realizada, clique em OK e o Google Earth será aberto.");
+                Runtime.getRuntime().exec("C:/Program Files/Google/Google Earth Pro/client/googleearth.exe");
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -519,6 +656,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -527,6 +666,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     // End of variables declaration//GEN-END:variables
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("computer.png")));
